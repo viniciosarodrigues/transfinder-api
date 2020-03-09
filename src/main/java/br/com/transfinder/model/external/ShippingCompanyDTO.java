@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Entidade para listagem da tela principal
+ * Entidade reduzida para listagem da tela principal
  */
 @Data
 @EqualsAndHashCode

@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * DTO para comunicação com o Client Angular
+ * Entidade detalhada para alteração e criação do objeto principal
  * 
  * @author viniciosarodrigues
  *

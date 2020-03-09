@@ -1,4 +1,4 @@
-package br.com.transfinder.model;
+package br.com.transfinder.model.enums;
 
 public enum ModalType {
 

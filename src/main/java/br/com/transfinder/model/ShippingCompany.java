@@ -3,12 +3,12 @@ package br.com.transfinder.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import br.com.transfinder.model.enums.ModalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -41,8 +41,23 @@ public class ShippingCompany implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private ModalType modalType;
 
-	@Embedded
-	private Address address;
+	@Column(name = "cep")
+	private String postalCode;
+
+	@Column(name = "cidade")
+	private String city;
+
+	@Column(name = "bairro")
+	private String neighborhood;
+
+	@Column(name = "rua")
+	private String street;
+
+	@Column(name = "numero")
+	private String number;
+
+	@Column(name = "complemento")
+	private String complement;
 
 	@Column(name = "url_logo")
 	private String urlLogo;

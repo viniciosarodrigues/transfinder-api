@@ -29,7 +29,7 @@ public class ShippingCompanyService {
 	 * @param id
 	 * @return
 	 */
-	private ShippingCompanyDetailsDTO findById(Long id) {
+	public ShippingCompanyDetailsDTO findById(Long id) {
 		ShippingCompany companyFromDb = repository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Transportadora", id));
 

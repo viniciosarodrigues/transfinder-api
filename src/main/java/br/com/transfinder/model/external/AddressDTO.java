@@ -19,6 +19,9 @@ public class AddressDTO implements Serializable {
 	@NotNull(message = "O CEP é obrigatório")
 	private String postalCode;
 
+	@NotNull(message = "Informe a Unidade Federativa")
+	private String uf;
+
 	@NotNull(message = "A cidade é obrigatória")
 	private String city;
 

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.com.transfinder.model.enums.ModalType;
@@ -22,6 +23,7 @@ public class ShippingCompany implements Serializable {
 
 	private static final long serialVersionUID = -2928666651629148613L;
 
+	@Id
 	private Long id;
 
 	private String email;
@@ -43,6 +45,8 @@ public class ShippingCompany implements Serializable {
 
 	@Column(name = "cep")
 	private String postalCode;
+
+	private String uf;
 
 	@Column(name = "cidade")
 	private String city;

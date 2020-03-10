@@ -10,7 +10,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class FilterRequest implements Serializable {
+public class FilterObject implements Serializable {
 	private static final long serialVersionUID = -7571845680560006629L;
 
 	private String name;

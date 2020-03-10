@@ -2,13 +2,17 @@ package br.com.transfinder.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.transfinder.exception.ObjectNotFoundException;
 import br.com.transfinder.model.ShippingCompany;
 import br.com.transfinder.model.external.AddressDTO;
+import br.com.transfinder.model.external.ShippingCompanyDTO;
 import br.com.transfinder.model.external.ShippingCompanyDetailsDTO;
 import br.com.transfinder.repository.ShippingCompanyRepository;
+import br.com.transfinder.repository.filter.FilterRequest;
 
 /**
  * Camada de serviços.Regras da aplicação, conversões e especificidades devem
@@ -36,6 +40,10 @@ public class ShippingCompanyService {
 		ShippingCompanyDetailsDTO responseDto = convertDomainToDTO(companyFromDb);
 
 		return responseDto;
+	}
+
+	public Page<ShippingCompanyDTO> getFilteredList(FilterRequest filter, Pageable pageable) {
+		return repository.resume(filter, pageable);
 	}
 
 	/**

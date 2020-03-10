@@ -35,19 +35,20 @@ public class ShippingCompanyController {
 		return ResponseEntity.ok().body(service.findById(id));
 	}
 
+	@ApiOperation(nickname = "company-get", value = "Busca informações resumidas das Transportadoras")
 	@GetMapping()
 	public Page<ShippingCompanyDTO> resumir(FilterObject filter, Pageable pageable) {
 		return service.getFilteredList(filter, pageable);
 	}
 
-	@ApiOperation(nickname = "company-put", value = "Busca informações detalhadas da Transportadora")
+	@ApiOperation(nickname = "company-put", value = "Realiza a alteração dos dados da Transportadora")
 	@PutMapping("/{id}")
 	private ResponseEntity<ShippingCompanyDetailsDTO> update(@PathVariable("id") Long id,
 			@RequestBody @Valid ShippingCompanyDetailsDTO requestObject) {
 		return ResponseEntity.ok().body(service.update(id, requestObject));
 	}
 
-	@ApiOperation(nickname = "company-delet", value = "Deleta a Transportadora")
+	@ApiOperation(nickname = "company-delete", value = "Deleta a Transportadora")
 	@DeleteMapping("/{id}")
 	private ResponseEntity<Void> delete(@PathVariable("id") Long id) {
 		service.deleteById(id);

@@ -1,4 +1,4 @@
-package br.com.transfinder.repository.query;
+package br.com.transfinder.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +14,6 @@ import br.com.transfinder.repository.filter.FilterObject;
  */
 public interface ShippingCompanyQuery {
 
-	public Page<ShippingCompanyDTO> resume(FilterObject filter, Pageable pageable);
+	public Page<ShippingCompanyDTO> getPageFromFilter(FilterObject filter, Pageable pageable);
 
 }

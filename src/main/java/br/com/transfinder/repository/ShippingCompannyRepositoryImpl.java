@@ -1,4 +1,4 @@
-package br.com.transfinder.repository.query;
+package br.com.transfinder.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import br.com.transfinder.model.ShippingCompany;
@@ -26,6 +27,7 @@ import br.com.transfinder.repository.filter.FilterObject;
  * @author viniciosarodrigues
  *
  */
+@Component
 public class ShippingCompannyRepositoryImpl implements ShippingCompanyQuery {
 
 	@PersistenceContext
@@ -35,13 +37,13 @@ public class ShippingCompannyRepositoryImpl implements ShippingCompanyQuery {
 	 * Realiza a busca paginada resumida com filtros
 	 */
 	@Override
-	public Page<ShippingCompanyDTO> resume(FilterObject filter, Pageable pageable) {
+	public Page<ShippingCompanyDTO> getPageFromFilter(FilterObject filter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<ShippingCompanyDTO> criteria = builder.createQuery(ShippingCompanyDTO.class);
 		Root<ShippingCompany> root = criteria.from(ShippingCompany.class);
 
-		criteria.select(builder.construct(ShippingCompanyDTO.class, root.get("id"), root.get("logo"), root.get("name"),
-				root.get("cnpj"), root.get("number"), root.get("cellphone"), root.get("name")));
+		criteria.select(builder.construct(ShippingCompanyDTO.class, root.get("id"), root.get("urlLogo"),
+				root.get("name"), root.get("cnpj"), root.get("number"), root.get("cellphone"), root.get("email")));
 
 		Predicate[] predicates = createRestrictions(filter, builder, root);
 		criteria.where(predicates);
@@ -97,17 +99,17 @@ public class ShippingCompannyRepositoryImpl implements ShippingCompanyQuery {
 		List<Predicate> predicates = new ArrayList<>();
 
 		if (!StringUtils.isEmpty(filter.getName())) {
-			predicates.add(builder.like(builder.lower(root.get("name")), "%" + filter.getName() + "%"));
+			predicates.add(builder.like(builder.lower(root.get("name")), "%" + filter.getName().toLowerCase() + "%"));
 		}
 
 		if (!StringUtils.isEmpty(filter.getUf())) {
 			predicates.add(builder.equal(root.get("uf"), filter.getUf()));
 		}
 		if (!StringUtils.isEmpty(filter.getCity())) {
-			predicates.add(builder.equal(root.get("city"), filter.getUf()));
+			predicates.add(builder.equal(root.get("city"), filter.getCity()));
 		}
 		if (!StringUtils.isEmpty(filter.getModalType())) {
-			predicates.add(builder.equal(root.get("modalType"), filter.getUf()));
+			predicates.add(builder.equal(root.get("modalType"), filter.getModalType()));
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

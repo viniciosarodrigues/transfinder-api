@@ -11,6 +11,7 @@ import br.com.transfinder.model.ShippingCompany;
 import br.com.transfinder.model.external.AddressDTO;
 import br.com.transfinder.model.external.ShippingCompanyDTO;
 import br.com.transfinder.model.external.ShippingCompanyDetailsDTO;
+import br.com.transfinder.repository.ShippingCompanyQuery;
 import br.com.transfinder.repository.ShippingCompanyRepository;
 import br.com.transfinder.repository.filter.FilterObject;
 
@@ -26,6 +27,9 @@ public class ShippingCompanyService {
 
 	@Autowired
 	private ShippingCompanyRepository repository;
+
+	@Autowired
+	private ShippingCompanyQuery customRepository;
 
 	/**
 	 * Busca a transportadora com informações detalhadas
@@ -43,7 +47,7 @@ public class ShippingCompanyService {
 	}
 
 	public Page<ShippingCompanyDTO> getFilteredList(FilterObject filter, Pageable pageable) {
-		return repository.resume(filter, pageable);
+		return customRepository.getPageFromFilter(filter, pageable);
 	}
 
 	/**

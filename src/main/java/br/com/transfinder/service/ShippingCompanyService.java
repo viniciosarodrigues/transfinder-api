@@ -1,5 +1,7 @@
 package br.com.transfinder.service;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -68,5 +70,15 @@ public class ShippingCompanyService {
 		convertedObject.setAddress(addressDTO);
 
 		return convertedObject;
+	}
+
+	public ShippingCompanyDetailsDTO update(Long id, @Valid ShippingCompanyDetailsDTO requestObject) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+
 	}
 }

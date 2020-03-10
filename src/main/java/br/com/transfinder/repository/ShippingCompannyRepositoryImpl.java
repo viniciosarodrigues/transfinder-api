@@ -43,7 +43,7 @@ public class ShippingCompannyRepositoryImpl implements ShippingCompanyQuery {
 		Root<ShippingCompany> root = criteria.from(ShippingCompany.class);
 
 		criteria.select(builder.construct(ShippingCompanyDTO.class, root.get("id"), root.get("urlLogo"),
-				root.get("name"), root.get("cnpj"), root.get("number"), root.get("cellphone"), root.get("email")));
+				root.get("name"), root.get("cnpj"), root.get("phone"), root.get("cellphone"), root.get("email")));
 
 		Predicate[] predicates = createRestrictions(filter, builder, root);
 		criteria.where(predicates);

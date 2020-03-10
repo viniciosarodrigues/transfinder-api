@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 
 import br.com.transfinder.model.ShippingCompany;
 import br.com.transfinder.model.external.ShippingCompanyDTO;
-import br.com.transfinder.repository.filter.FilterRequest;
+import br.com.transfinder.repository.filter.FilterObject;
 
 /**
  * Repositório inteligente para busca paginada
@@ -35,7 +35,7 @@ public class ShippingCompannyRepositoryImpl implements ShippingCompanyQuery {
 	 * Realiza a busca paginada resumida com filtros
 	 */
 	@Override
-	public Page<ShippingCompanyDTO> resume(FilterRequest filter, Pageable pageable) {
+	public Page<ShippingCompanyDTO> resume(FilterObject filter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<ShippingCompanyDTO> criteria = builder.createQuery(ShippingCompanyDTO.class);
 		Root<ShippingCompany> root = criteria.from(ShippingCompany.class);
@@ -58,7 +58,7 @@ public class ShippingCompannyRepositoryImpl implements ShippingCompanyQuery {
 	 * @param filter
 	 * @return
 	 */
-	private Long setPageSetting(FilterRequest filter) {
+	private Long setPageSetting(FilterObject filter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
 		Root<ShippingCompany> root = criteriaQuery.from(ShippingCompany.class);
@@ -93,7 +93,7 @@ public class ShippingCompannyRepositoryImpl implements ShippingCompanyQuery {
 	 * @param root
 	 * @return
 	 */
-	private Predicate[] createRestrictions(FilterRequest filter, CriteriaBuilder builder, Root<ShippingCompany> root) {
+	private Predicate[] createRestrictions(FilterObject filter, CriteriaBuilder builder, Root<ShippingCompany> root) {
 		List<Predicate> predicates = new ArrayList<>();
 
 		if (!StringUtils.isEmpty(filter.getName())) {

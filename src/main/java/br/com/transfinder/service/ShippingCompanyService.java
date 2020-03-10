@@ -12,7 +12,7 @@ import br.com.transfinder.model.external.AddressDTO;
 import br.com.transfinder.model.external.ShippingCompanyDTO;
 import br.com.transfinder.model.external.ShippingCompanyDetailsDTO;
 import br.com.transfinder.repository.ShippingCompanyRepository;
-import br.com.transfinder.repository.filter.FilterRequest;
+import br.com.transfinder.repository.filter.FilterObject;
 
 /**
  * Camada de serviços.Regras da aplicação, conversões e especificidades devem
@@ -42,7 +42,7 @@ public class ShippingCompanyService {
 		return responseDto;
 	}
 
-	public Page<ShippingCompanyDTO> getFilteredList(FilterRequest filter, Pageable pageable) {
+	public Page<ShippingCompanyDTO> getFilteredList(FilterObject filter, Pageable pageable) {
 		return repository.resume(filter, pageable);
 	}
 

@@ -78,7 +78,8 @@ public class ShippingCompanyService {
 	}
 
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
+		findById(id);
+		repository.deleteById(id);
 
 	}
 }

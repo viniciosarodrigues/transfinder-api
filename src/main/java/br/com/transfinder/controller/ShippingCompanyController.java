@@ -1,5 +1,7 @@
 package br.com.transfinder.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.transfinder.model.external.FilterCount;
 import br.com.transfinder.model.external.ShippingCompanyDTO;
 import br.com.transfinder.model.external.ShippingCompanyDetailsDTO;
 import br.com.transfinder.repository.filter.FilterObject;
@@ -38,7 +41,7 @@ public class ShippingCompanyController {
 
 	@ApiOperation(nickname = "company-get", value = "Busca informações resumidas das Transportadoras")
 	@GetMapping()
-	public Page<ShippingCompanyDTO> resumir(FilterObject filter, Pageable pageable) {
+	public Page<ShippingCompanyDTO> resume(FilterObject filter, Pageable pageable) {
 		return service.getFilteredList(filter, pageable);
 	}
 
@@ -61,5 +64,11 @@ public class ShippingCompanyController {
 	private ResponseEntity<Void> delete(@PathVariable("id") Long id) {
 		service.deleteById(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@ApiOperation(nickname = "company-get-filter", value = "Busca a lista de filtros agrupada")
+	@GetMapping("/filter")
+	public List<List<FilterCount>> getFiltersCount() {
+		return service.getFilterCount();
 	}
 }

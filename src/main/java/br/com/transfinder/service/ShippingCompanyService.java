@@ -1,5 +1,8 @@
 package br.com.transfinder.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import br.com.transfinder.exception.ObjectNotFoundException;
 import br.com.transfinder.model.ShippingCompany;
 import br.com.transfinder.model.external.AddressDTO;
+import br.com.transfinder.model.external.FilterCount;
 import br.com.transfinder.model.external.ShippingCompanyDTO;
 import br.com.transfinder.model.external.ShippingCompanyDetailsDTO;
 import br.com.transfinder.repository.ShippingCompanyQuery;
@@ -100,5 +104,20 @@ public class ShippingCompanyService {
 		findById(id);
 		repository.deleteById(id);
 
+	}
+
+	/**
+	 * Realiza a busca agrupada de filtros
+	 * 
+	 * @return
+	 */
+	public List<List<FilterCount>> getFilterCount() {
+		List<List<FilterCount>> filterCount = new ArrayList<>();
+
+		filterCount.add(repository.getUFCount());
+		filterCount.add(repository.getCityCount());
+		filterCount.add(repository.getModalCount());
+
+		return filterCount;
 	}
 }

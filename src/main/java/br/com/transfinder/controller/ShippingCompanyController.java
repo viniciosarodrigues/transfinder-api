@@ -1,7 +1,5 @@
 package br.com.transfinder.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.transfinder.model.external.FilterCount;
+import br.com.transfinder.model.external.FilterCountDTO;
 import br.com.transfinder.model.external.ShippingCompanyDTO;
 import br.com.transfinder.model.external.ShippingCompanyDetailsDTO;
 import br.com.transfinder.repository.filter.FilterObject;
@@ -68,7 +66,7 @@ public class ShippingCompanyController {
 
 	@ApiOperation(nickname = "company-get-filter", value = "Busca a lista de filtros agrupada")
 	@GetMapping("/filter")
-	public List<List<FilterCount>> getFiltersCount() {
+	public FilterCountDTO getFiltersCount() {
 		return service.getFilterCount();
 	}
 }

@@ -14,11 +14,12 @@ import org.springframework.stereotype.Service;
 import br.com.transfinder.exception.ObjectNotFoundException;
 import br.com.transfinder.model.ShippingCompany;
 import br.com.transfinder.model.external.AddressDTO;
-import br.com.transfinder.model.external.FilterCount;
+import br.com.transfinder.model.external.FilterCountDTO;
 import br.com.transfinder.model.external.ShippingCompanyDTO;
 import br.com.transfinder.model.external.ShippingCompanyDetailsDTO;
 import br.com.transfinder.repository.ShippingCompanyQuery;
 import br.com.transfinder.repository.ShippingCompanyRepository;
+import br.com.transfinder.repository.filter.FilterCount;
 import br.com.transfinder.repository.filter.FilterObject;
 
 /**
@@ -111,13 +112,13 @@ public class ShippingCompanyService {
 	 * 
 	 * @return
 	 */
-	public List<List<FilterCount>> getFilterCount() {
+	public FilterCountDTO getFilterCount() {
 		List<List<FilterCount>> filterCount = new ArrayList<>();
 
 		filterCount.add(repository.getUFCount());
 		filterCount.add(repository.getCityCount());
 		filterCount.add(repository.getModalCount());
 
-		return filterCount;
+		return new FilterCountDTO(filterCount);
 	}
 }

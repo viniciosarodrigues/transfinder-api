@@ -1,4 +1,4 @@
-package br.com.transfinder.model.external;
+package br.com.transfinder.repository.filter;
 
 import java.io.Serializable;
 

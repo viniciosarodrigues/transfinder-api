@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,11 +42,18 @@ public class ShippingCompanyController {
 		return service.getFilteredList(filter, pageable);
 	}
 
+	@ApiOperation(nickname = "company-post", value = "Realiza a criação da Transportadora")
+	@PostMapping
+	private ResponseEntity<ShippingCompanyDetailsDTO> update(
+			@RequestBody @Valid ShippingCompanyDetailsDTO requestObject) {
+		return ResponseEntity.ok().body(service.updateOrCreate(null, requestObject, true));
+	}
+
 	@ApiOperation(nickname = "company-put", value = "Realiza a alteração dos dados da Transportadora")
 	@PutMapping("/{id}")
 	private ResponseEntity<ShippingCompanyDetailsDTO> update(@PathVariable("id") Long id,
 			@RequestBody @Valid ShippingCompanyDetailsDTO requestObject) {
-		return ResponseEntity.ok().body(service.update(id, requestObject));
+		return ResponseEntity.ok().body(service.updateOrCreate(id, requestObject, false));
 	}
 
 	@ApiOperation(nickname = "company-delete", value = "Deleta a Transportadora")

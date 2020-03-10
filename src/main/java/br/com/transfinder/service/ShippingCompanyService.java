@@ -72,9 +72,28 @@ public class ShippingCompanyService {
 		return convertedObject;
 	}
 
-	public ShippingCompanyDetailsDTO update(Long id, @Valid ShippingCompanyDetailsDTO requestObject) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Realiza a atualização das informações da Transportadora
+	 * 
+	 * @param id
+	 * @param requestObject
+	 * @return
+	 */
+	public ShippingCompanyDetailsDTO updateOrCreate(Long id, @Valid ShippingCompanyDetailsDTO requestObject,
+			Boolean isNew) {
+		if (!isNew)
+			repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Transportadora", id));
+
+		ShippingCompany updatedShippingCompany = new ShippingCompany();
+
+		BeanUtils.copyProperties(requestObject, updatedShippingCompany);
+		BeanUtils.copyProperties(requestObject.getAddress(), updatedShippingCompany);
+		updatedShippingCompany.setId(id);
+		if (isNew)
+			updatedShippingCompany.setId(null);
+		repository.save(updatedShippingCompany);
+
+		return requestObject;
 	}
 
 	public void deleteById(Long id) {

@@ -26,7 +26,7 @@ public class ShippingCompany implements Serializable {
 	private static final long serialVersionUID = -2928666651629148613L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String email;

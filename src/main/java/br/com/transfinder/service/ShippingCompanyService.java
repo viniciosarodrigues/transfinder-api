@@ -97,6 +97,7 @@ public class ShippingCompanyService {
 		if (isNew)
 			updatedShippingCompany.setId(null);
 		repository.save(updatedShippingCompany);
+		requestObject.setId(updatedShippingCompany.getId());
 
 		return requestObject;
 	}
